@@ -1,0 +1,15 @@
+{
+  "name": "sprint_project",
+  "version": "1.0.0",
+  "description": "Projeto para Reservas de Salas de aulas do SENAI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "author": "Mateus, Yasmin, Arthur",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

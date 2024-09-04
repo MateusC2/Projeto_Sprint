@@ -18,11 +18,13 @@ class AppController {
 
   //Define as rotas da nossa API
   routes() {
+    const apiRoutes = require('./routes/apiRoutes');
+    this.express.use('/project-sprint/api/', apiRoutes)
     //Define uma rota GET para o caminho health
-    this.express.get("/health/", (req, res) => {
+    this.express.get("/project-sprint/api/health/", (req, res) => {
       res.send({status: "OK"});
     });//Essa rota é usada para verificar se a Api esta ok
-  }
+  }1
 }
 
 //Exportando a instancia de Express configurada, para que seja acessada em outros arquivos

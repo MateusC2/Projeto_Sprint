@@ -1,71 +1,136 @@
 /* Estilos aplicados ao website Prototipando...*/
 
 /*Seletor Universal - seleciona todos os elemntos da página e aplica estilos comuns padronizados*/
-*{
-    margin: 0; /*remove a margem padrão de todos os elementos*/
-    padding: 0; /*remove o padding de todos os elementos*/
-    box-sizing: border-box /*inclui bordas e preenchimentos no cálculo da largura e altura dos elementos*/
-}/*fechamento do seletor*/
+* {
+  margin: 0; /*remove a margem padrão de todos os elementos*/
+  padding: 0; /*remove o padding de todos os elementos*/
+  box-sizing: border-box; /*inclui bordas e preenchimentos no cálculo da largura e altura dos elementos*/
+} /*fechamento do seletor*/
 
-body{
-    font-family: Arial, sans-serif; /*define a fonte da página com arial, com uma alternativa de sans-serif*/
-    background-color:#D90000; /*define cor de fundo do body / corpo do html */
-    color: rgb(240, 240, 240) /* define a cor do texto*/
+body {
+  font-family: Arial, sans-serif; /*define a fonte da página com arial, com uma alternativa de sans-serif*/
+  background-color: #d90000; /*define cor de fundo do body / corpo do html */
+  color: #333; /* define a cor do texto*/
+  min-height: 100vh;
+  position: relative;
 } /*fechamento do body*/
 
-/*estilo do cabeçalho*/ 
-header{
-    background-color: #D9D9D9; /*cor de fundo em hexadecimal*/
-    padding: 20px;
-    text-align: center; /*alinha o texto para o centro*/
-}/*fechamento do header*/
+/*estilo do cabeçalho*/
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0px;
+  background-color: #c4c4c4; /*cor de fundo em hexadecimal*/
+  padding: 15px;
+  text-align: center;
+} /*fechamento do header*/
 
-header button{
-    right: 20px; /*alinha o botão á direita, com 20px de distância da borda direita da página*/
-    top: 10px; /*alinha o botão ao topo, com 20px de distância da borda superior*/
-    position: absolute; /*posiciona o botão em relação ao cabeçalho*/
-    background-color: #FF0000;
-    color: rgb(240, 240, 240);
-    padding: 10px 15px; /*define o espaço interno do botão em (10px na vertical) (20px na horizontal)*/
-    border-radius: 5px; /*arredonda os cantos*/
-    border: none; /*remove a borda padrão do botão*/
-    cursor: pointer; /*defien o cursor como um ponteiro ao passar sobre o botão*/
-}/*fechamento do header butoon*/
+header button {
+  background-color: red; /* Cor de fundo dos botões */
+  color: white; /* Cor do texto dos botões */
+  border: none; /* Remove borda dos botões */
+  padding: 10px 20px; /* Espaçamento interno dos botões */
+  font-size: 16px; /* Tamanho da fonte */
+  cursor: pointer; /* Mostra um cursor de ponteiro ao passar por cima */
+  border-radius: 5px; /* Deixa os cantos dos botões arredondados */
+  margin: 10px 10px; /* Espaçamento entre os botões */
+}
 
-header h3{
-    /*remove a margem e o padding padrão do h3 dentro do header*/
-    margin: 0;
-    padding: 20px;
-}/*fechamento da header h3*/
+header h3 {
+    position: absolute; /* Define o contêiner do título como absolutamente posicionado */
+    width: 100%; /* Faz o contêiner ocupar toda a largura do cabeçalho */
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    margin: 0px;
+  }
 
-main{
-    padding: 40px;
-    text-align: center;
-}/*fechamento do main*/
+main {
+  padding: 40px;
+  text-align: center;
+} /*fechamento do main*/
 
-main img{
-    max-width: 160px; /*define a largura máxima das imagens dentro do main*/
-    background-color: #D9D9D9;
-    padding: 20px;
-    border-radius: 0px;
-    padding-bottom: 10px;
-}/*fechamento do main img*/
+main img {
+  max-width: 160px; /*define a largura máxima das imagens dentro do main*/
+  background-color: #c4c4c4;
+  padding: 10px;
+  border-radius: 0px;
+  padding-bottom: 10px;
+} /*fechamento do main img*/
 
-section{
-    background-color: #D9D9D9;
-    width: 30%; /* Ajusta a largura do elemento */
-    padding: 10px;
-    border-radius: 5px;
-    padding-bottom: 0px;
-    margin: 20px 400px; /*define a margem superior e */
-}/*fechamento section*/
+#home {
+  background-color: #c4c4c4;
+  width: 30%; /* Ajusta a largura do elemento */
+  padding: 20px;
+  border-radius: 10px;
+  padding-bottom: 40px;
+  margin: 20px 420px; /*define a margem superior e */
+} /*fechamento section*/
+
+#login {
+  background-color: #c4c4c4;
+  width: 30%; /* Ajusta a largura do elemento */
+  padding: 10px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  margin: 20px 410px; /*define a margem superior e */
+} /*fechamento section*/
 
 /*estilo de rodapé*/
-footer{
-    background-color: #D9D9D9;
-    padding: 25px;
-    text-align: center; /*alinha o texto da rodapé ao */
-    bottom: 0; 
-    position: absolute; /*posiciona o rodapé de forma absoluta em relação ao body*/
-    width: 100%; /*define*/
-}/*fechamento do footer*/
+footer {
+  background-color: #c4c4c4; /* Cor de fundo escura */
+  text-align: center; /* Centraliza o texto */
+  padding: 15px; /* Espaçamento interno no topo e na base */
+  width: 100%; /* Faz com que o rodapé ocupe toda a largura */
+  position: absolute; /* Posiciona o rodapé de forma absoluta */
+  bottom: 0; /* Posiciona o rodapé na parte inferior da página */
+}
+
+.login-button {
+  background-color: #ff0000;
+  color: rgb(240, 240, 240);
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 10px; /*arredonda os cantos*/
+  border: none;
+  cursor: pointer; /*defien o cursor como um ponteiro ao passar sobre o botão*/
+}
+
+#cadastro {
+  background-color: #c4c4c4;
+  width: 30%; /* Ajusta a largura do elemento */
+  padding: 10px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  margin: 0px 410px; /*define a margem superior e */
+}
+
+.cadastro-button {
+  background-color: #ff0000;
+  color: rgb(240, 240, 240);
+  padding: 5px;
+  width: 50%;
+  padding-bottom: 5px;
+  border-radius: 5px; /*arredonda os cantos*/
+  border: none; /*Tira as bordas*/
+  cursor: pointer; /*define o cursor como um ponteiro ao passar sobre o botão*/
+}
+
+.login-nsenha {
+  cursor: pointer; /*define o cursor como um ponteiro ao passar sobre o botão*/
+  text-decoration: underline;
+}
+
+.input-box {
+  width: 80%;
+  padding: 8px;
+  margin: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e1dfdf;
+}
+
+main section h2 {
+  font-size: 20px;
+}

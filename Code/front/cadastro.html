@@ -23,23 +23,16 @@
         <form id="formulario-registro">
           <h2>Cadastre-se</h2>
           <label for="nome"></label>
-          <input type="text" placeholder="Nome" class="input-box" />
+          <input type="text" placeholder="Nome" class="input-box" id="nome" name="nome" />
 
           <label for="email"></label>
-          <input type="text" placeholder="Email" class="input-box" />
+          <input type="text" placeholder="Email" class="input-box" id="email" name="email"/>
 
           <label for="telefone"></label>
-          <input type="text" placeholder="Telefone" class="input-box" />
+          <input type="text" placeholder="Telefone" class="input-box" id="telefone" name="telefone"/>
 
           <label for="senha"></label>
-          <input type="password" placeholder="Senha" class="input-box" />
-
-          <label for="senha"></label>
-          <input
-            type="password"
-            placeholder="Confirme Senha"
-            class="input-box"
-          />
+          <input type="password" placeholder="Senha" class="input-box" id="senha" name="senha"/>
           <br/>
           <button type="submit" class="cadastro-button">Entrar</button>
           <br />
@@ -47,7 +40,8 @@
       </section>
     </main>
     <footer>
-      <p>Desenvolvido por:Yasmin, Mateus e Arthur</p>
+      <p>&copy;Desenvolvido por:Yasmin, Mateus e Arthur</p>
     </footer>
+    <script src="app.js"></script>
   </body>
 </html>

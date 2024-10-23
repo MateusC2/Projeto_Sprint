@@ -1,6 +1,7 @@
 const connect = require("../db/connect");
 
 module.exports = class userController {
+  // Função para criação de usuário
   static async createUser(req, res) {
     const { nome, email, telefone, senha } = req.body;
 
@@ -17,7 +18,6 @@ module.exports = class userController {
     } else {
       // Construção da query INSERT
       const query = `INSERT INTO usuario (nome, email, telefone, senha) VALUES ('${nome}', '${email}', '${telefone}', '${senha}')`;
-      //executando a query criada
       try {
         connect.query(query, function (err, results) {
           if (err) {
@@ -64,52 +64,92 @@ module.exports = class userController {
           message: "Login realizado com sucesso",
         });
       });
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   }
+
   // função para alteração PUT
-static async updateUser(req,res){
-  //Desestrutura e recupera os dados enviados via corpo da requisição
-  const { id, nome, email, telefone, senha } = req.body;
+  static async updateUser(req, res) {
+    //Desestrutura e recupera os dados enviados via corpo da requisição
+    const { id, nome, email, telefone, senha } = req.body;
 
-  //Validar se todos os campos foram peenchidos
-  if (!id || !nome || !email || !telefone || !senha) {
-    return res
-      .status(400)
-      .json({ error: "Todos os campos devem ser preenchidos" });
+    //Validar se todos os campos foram peenchidos
+    if (!id || !nome || !email || !telefone || !senha) {
+      return res
+        .status(400)
+        .json({ error: "Todos os campos devem ser preenchidos" });
+    }
+    const query = `UPDATE usuario SET nome=?, email=?, telefone=?, senha=? WHERE id_usuario=?`;
+    const values = [nome, email, telefone, senha, id];
+
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
+          if (err.code === "ER_DUP_ENTRY") {
+            return res.status(400).json({
+              error: "Email já esta cadastrado por outro usuario",
+            });
+          } else {
+            console.error(err);
+            return res.status(500).json({ error: "Erro interno do servidor" });
+          }
+        }
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Usuario não encontrado" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Usuario atualizado com sucesso" });
+      });
+    } catch (error) {
+      console.error("Erro ao executar consulta", error);
+      return res.status(500).json({ error: "Erro interno do servidor" });
+    }
   }
-  const query = `UPDATE usuario SET nome=?, email=?, telefone=?, senha=? WHERE id_usuario=?`;
-  const values = [nome, email, telefone, senha, id];
 
-  try {
-    connect.query(query, values, function (err, results) {
-      if (err) {
-        if (err.code === "ER_DUP_ENTRY") {
-          return res.status(400).json({
-            error: "Email já esta cadastrado por outro usuario",
-          });
-        } else {
+  // Função para exclusão DELETE
+  static async deleteUser(req, res) {
+    const usuarioId = req.params.id;
+    const query = `DELETE FROM usuario WHERE id_usuario = ?`;
+    const values = [usuarioId];
+
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
           console.error(err);
           return res.status(500).json({ error: "Erro interno do servidor" });
         }
-      }
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: "Usuario não encontrado" });
-      }
-      return res
-        .status(200)
-        .json({ message: "Usuario atualizado com sucesso" });
-    });
-  } catch (error) {
-    console.error("Erro ao executar consulta", error);
-    return res.status(500).json({ error: "Erro interno do servidor" });
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Usuario não encontrado" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Usuario excluido com sucesso" });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ erro: "Erro interno do servidor" });
+    }
   }
- }
+  
+  static async getAllUsers(req, res) {
+    const query = `SELECT * FROM usuario`;
 
- // Função para exclusão DELETE
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro Interno do Servidor" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Lista Usuários", users: results });
+      });
+    } catch (error) {
+      console.error("Erro ao executar consulta:", error);
+      return res.status(500).json({ error: "Erro Interno do Servidor" });
+    }
+  }
 };
-
-
-

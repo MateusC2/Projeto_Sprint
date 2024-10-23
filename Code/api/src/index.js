@@ -1,5 +1,7 @@
 const express = require("express"); //Importa o módulo Express
+
 const testConnect = require('./db/testConnect');
+
 const cors = require("cors");
 
 class AppController {

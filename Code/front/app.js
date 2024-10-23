@@ -1,10 +1,6 @@
 //Chamada da função createUser para a associação ao evento de envio a formulário
 document.getElementById("formulario-registro").addEventListener("submit", createUser);
 
-
-document.addEventListener("DOMContentLoaded", getAllUsers)
-
-
 function createUser(event) {
   //Previne o comportamento padrao do formulario, ou seja, impede que ele seja enviado e recarregue a pagona
   event.preventDefault();

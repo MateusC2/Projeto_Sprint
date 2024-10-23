@@ -112,7 +112,7 @@ footer {
   padding: 5px;
   width: 50%;
   padding-bottom: 5px;
-  border-radius: 5px; /*arredonda os cantos*/
+  border-radius: 10px; /*arredonda os cantos*/
   border: none; /*Tira as bordas*/
   cursor: pointer; /*define o cursor como um ponteiro ao passar sobre o botão*/
 }

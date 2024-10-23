@@ -20,13 +20,13 @@
       <!--primeira seção do conteúdo-->
       <section id="login">
         <img src="senaisplogo.png" alt="Logo SENAI SP" />
-        <form>
+        <form id="login-form">
           <h2>Login</h2>
-          <label for="username"></label>
-          <input type="text" placeholder="Username" class="input-box" />
+          <label for="email"></label>
+          <input type="text" placeholder="Email" class="input-box" id="email" name="email"/>
           <br />
           <label for="senha"></label>
-          <input type="password" placeholder="senha" class="input-box" />
+          <input type="password" placeholder="Senha" class="input-box" id="senha" name="senha"/>
           <br />
           <button type="submit" class="login-button">Entrar</button>
           <br />
@@ -42,5 +42,6 @@
     <footer>
       <p>&copy;Desenvolvido por:Yasmin, Mateus e Arthur</p>
     </footer>
+    <script src="login.js"></script>
   </body>
 </html>

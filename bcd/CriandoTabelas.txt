@@ -2,27 +2,26 @@ create database agenda;
 use agenda;
 
 CREATE TABLE usuario (
-    Id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefone CHAR(14) NOT NULL,
     senha VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE usuario (
-    Id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    telefone CHAR(14) NOT NULL,
-    senha VARCHAR(30) NOT NULL
+CREATE TABLE salas (
+    id_salas INT PRIMARY KEY AUTO_INCREMENT,
+    classificacao VARCHAR(100) NOT NULL,
+    horarios_disponiveis datetime NOT NULL,
+    bloco VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE reserva (
     id_reservas INT AUTO_INCREMENT PRIMARY KEY,
     fkid_usuario INT NOT NULL,
-    fkid_salas INT NOT NULL,
+    fkid_sala INT NOT NULL,
+    FOREIGN KEY (fkid_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (fkid_sala) REFERENCES salas(id_salas),
     horario TIME,
-    data DATE,
-    FOREIGN KEY (fkid_usuario) REFERENCES usuario(Id_usuario),
-    FOREIGN KEY (fkid_salas) REFERENCES salas(id_salas)
+    data DATE  
 );

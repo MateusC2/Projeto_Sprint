@@ -1,4 +1,4 @@
-INSERT INTO sala (classificacao, horarios_disponiveis, bloco) VALUES 
+INSERT INTO salas (classificacao, horarios_disponiveis, bloco) VALUES 
 ('Alta Mogiana Almoxarife', 'Segunda a sexta-feira, das 8h às 17h', 'A'),
 ('Alta Mogiana Automotiva', 'Segunda a sexta-feira, das 8h às 17h', 'A'),
 ('Alta Mogiana Desenvolvimento de Sistema', 'Segunda a sexta-feira, das 8h às 17h', 'A'),

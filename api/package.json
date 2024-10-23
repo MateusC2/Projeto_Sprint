@@ -10,6 +10,9 @@
   "author": "Mateus, Yasmin, Arthur",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "mysql2": "^3.11.3"
   }
 }

@@ -11,7 +11,7 @@ function createUser(event) {
 
   //Captura os valores dos campos do formularios
   const nome = document.getElementById("nome").value;
-  const cpf = document.getElementById("cpf").value;
+  const telefone = document.getElementById("telefone").value;
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
@@ -24,7 +24,7 @@ function createUser(event) {
       "Content-Type": "application/json",
     },
     //Transforma os dados do formulario de uma string json para serem enviados no corpo da req
-    body: JSON.stringify({ nome, cpf, email, senha }),
+    body: JSON.stringify({ nome, telefone, email, senha }),
   })
     .then((response) => {
       //Tratamento da resposta do servidor / API
@@ -56,38 +56,3 @@ function createUser(event) {
       console.error("Erro:", error.message);
     });
 } //Fechamento createUser
-
-
-function getAllUsers(){
-  fetch(" http://localhost:5000/api/v1/user/",{
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    }
-  })
-    .then((response) => {
-      if(response.ok) {
-        return response.json();
-      }
-      return response.json().then((err) => {
-        throw new Error(err.error);
-      });
-    })
-      .then((data) => {
-        const userList = document.getElementById("user-list");
-        userList.innerHTML = ""; //Limpa a lista existente
-
-        data.users.forEach((user)=>{
-          const listItem = document.createElement("li");
-          listItem.textContent = `Nome: ${user.nome},
-          CPF: ${user.cpf}, 
-          Email ${user.email}`
-          userList.appendChild(listItem);
-        })
-
-      })
-      .catch((error)=>{
-        alert("Erro ao obter usuários" + error.message);
-        console.error("Erro: ", error.message);
-      })
-}

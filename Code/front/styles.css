@@ -1,136 +1,158 @@
-/* Estilos aplicados ao website Prototipando...*/
-
-/*Seletor Universal - seleciona todos os elemntos da página e aplica estilos comuns padronizados*/
+/* Seletor Universal - aplica estilos padrão a todos os elementos da página */
 * {
-  margin: 0; /*remove a margem padrão de todos os elementos*/
-  padding: 0; /*remove o padding de todos os elementos*/
-  box-sizing: border-box; /*inclui bordas e preenchimentos no cálculo da largura e altura dos elementos*/
-} /*fechamento do seletor*/
+  margin: 0; /* Remove a margem padrão de todos os elementos */
+  padding: 0; /* Remove o padding padrão de todos os elementos */
+  box-sizing: border-box; /* Inclui bordas e padding no cálculo da largura e altura dos elementos */
+}
 
+/* Estiliza o corpo principal da página */
 body {
-  font-family: Arial, sans-serif; /*define a fonte da página com arial, com uma alternativa de sans-serif*/
-  background-color: #d90000; /*define cor de fundo do body / corpo do html */
-  color: #333; /* define a cor do texto*/
-  min-height: 100vh;
-  position: relative;
-} /*fechamento do body*/
+  font-family: Arial, sans-serif; /* Define a fonte padrão como Arial com fallback para sans-serif */
+  background-color: #d90000; /* Define a cor de fundo do body em vermelho */
+  color: #333; /* Define a cor do texto */
+  min-height: 100vh; /* Define altura mínima de 100% da viewport */
+  position: relative; /* Posiciona o body para o rodapé absoluto */
+  padding-bottom: 100px; /* Cria espaço para o rodapé na parte inferior da página */
+}
 
-/*estilo do cabeçalho*/
+/* Estilos para o cabeçalho */
 header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 0px;
-  background-color: #c4c4c4; /*cor de fundo em hexadecimal*/
-  padding: 15px;
-  text-align: center;
-} /*fechamento do header*/
-
-header button {
-  background-color: red; /* Cor de fundo dos botões */
-  color: white; /* Cor do texto dos botões */
-  border: none; /* Remove borda dos botões */
-  padding: 10px 20px; /* Espaçamento interno dos botões */
-  font-size: 16px; /* Tamanho da fonte */
-  cursor: pointer; /* Mostra um cursor de ponteiro ao passar por cima */
-  border-radius: 5px; /* Deixa os cantos dos botões arredondados */
-  margin: 10px 10px; /* Espaçamento entre os botões */
+  margin: 0px; /* Remove a margem */
+  background-color: #c4c4c4; /* Define cor de fundo cinza claro */
+  padding: 30px; /* Adiciona padding ao redor do conteúdo */
 }
 
 header h3 {
-    position: absolute; /* Define o contêiner do título como absolutamente posicionado */
-    width: 100%; /* Faz o contêiner ocupar toda a largura do cabeçalho */
-    display: flex; /* Usa flexbox para centralizar o conteúdo */
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    margin: 0px;
-  }
+  width: 100%; /* Define o contêiner como 100% da largura */
+  display: flex; /* Usa flexbox para centralização */
+  justify-content: center; /* Centraliza horizontalmente o conteúdo */
+  margin: 0px; /* Remove margens */
+}
 
+/* Estilos para o botão de login na home */
+.botao-loginHome {
+  position: absolute; /* Posiciona o botão de forma absoluta */
+  right: 30px; /* Posiciona o botão à direita */
+  top: 20px; /* Define a distância do topo */
+  background-color: red; /* Define a cor de fundo */
+  color: white; /* Define a cor do texto */
+  border: none; /* Remove a borda */
+  padding: 10px 20px; /* Define o espaçamento interno */
+  font-size: 16px; /* Define o tamanho da fonte */
+  cursor: pointer; /* Mostra o cursor como uma mão ao passar sobre o botão */
+  border-radius: 5px; /* Arredonda os cantos */
+}
+
+/* Estilos para o botão de cadastro */
+.botao-cadastro {
+  position: absolute;
+  right: 150px;
+  top: 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Estilos principais para a área de conteúdo */
 main {
-  padding: 40px;
-  text-align: center;
-} /*fechamento do main*/
+  padding: 40px; /* Define padding ao redor do conteúdo */
+  text-align: center; /* Centraliza o texto */
+}
 
 main img {
-  max-width: 160px; /*define a largura máxima das imagens dentro do main*/
+  max-width: 160px; /* Limita a largura máxima das imagens */
   background-color: #c4c4c4;
   padding: 10px;
   border-radius: 0px;
   padding-bottom: 10px;
-} /*fechamento do main img*/
+}
 
+/* Estilos para a seção "home" */
 #home {
   background-color: #c4c4c4;
-  width: 30%; /* Ajusta a largura do elemento */
+  width: 30%; /* Define a largura do elemento */
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 10px; /* Arredonda os cantos */
   padding-bottom: 40px;
-  margin: 20px 420px; /*define a margem superior e */
-} /*fechamento section*/
+  margin: 50px auto; /* Centraliza e adiciona margem superior */
+}
 
+/* Estilos para a seção de login */
 #login {
   background-color: #c4c4c4;
-  width: 30%; /* Ajusta a largura do elemento */
+  width: 30%;
   padding: 10px;
   border-radius: 10px;
   padding-bottom: 20px;
-  margin: 20px 410px; /*define a margem superior e */
-} /*fechamento section*/
-
-/*estilo de rodapé*/
-footer {
-  background-color: #c4c4c4; /* Cor de fundo escura */
-  text-align: center; /* Centraliza o texto */
-  padding: 15px; /* Espaçamento interno no topo e na base */
-  width: 100%; /* Faz com que o rodapé ocupe toda a largura */
-  position: absolute; /* Posiciona o rodapé de forma absoluta */
-  bottom: 0; /* Posiciona o rodapé na parte inferior da página */
+  margin: 30px auto; /* Centraliza e define margem superior */
 }
 
+/* Estilos para a seção de cadastro */
+#cadastro {
+  background-color: #c4c4c4;
+  width: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  margin: 10px auto;
+}
+
+/* Estilo do botão de login */
 .login-button {
   background-color: #ff0000;
   color: rgb(240, 240, 240);
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 10px;
-  border-radius: 10px; /*arredonda os cantos*/
-  border: none;
-  cursor: pointer; /*defien o cursor como um ponteiro ao passar sobre o botão*/
-}
-
-#cadastro {
-  background-color: #c4c4c4;
-  width: 30%; /* Ajusta a largura do elemento */
-  padding: 10px;
   border-radius: 10px;
-  padding-bottom: 20px;
-  margin: 0px 410px; /*define a margem superior e */
+  border: none;
+  cursor: pointer;
 }
 
+/* Estilo do botão de cadastro */
 .cadastro-button {
   background-color: #ff0000;
   color: rgb(240, 240, 240);
   padding: 5px;
-  width: 50%;
+  width: 50%; /* Define a largura do botão */
   padding-bottom: 5px;
-  border-radius: 10px; /*arredonda os cantos*/
-  border: none; /*Tira as bordas*/
-  cursor: pointer; /*define o cursor como um ponteiro ao passar sobre o botão*/
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
+/* Estilo para o link "esqueci minha senha" */
 .login-nsenha {
-  cursor: pointer; /*define o cursor como um ponteiro ao passar sobre o botão*/
-  text-decoration: underline;
+  cursor: pointer; /* Define o cursor como uma mão */
+  text-decoration: underline; /* Adiciona sublinhado */
 }
 
+/* Estilos para a caixa de entrada de texto */
 .input-box {
   width: 80%;
   padding: 8px;
   margin: 8px;
   border: none;
   border-radius: 5px;
-  background-color: #e1dfdf;
+  background-color: #e1dfdf; /* Fundo cinza claro */
 }
 
+/* Estilo para os títulos de seção dentro do main */
 main section h2 {
   font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Estilo do rodapé */
+footer {
+  background-color: #c4c4c4;
+  text-align: center;
+  padding: 15px;
+  width: 100%; /* Define o rodapé para ocupar toda a largura */
+  position: absolute; /* Posiciona de forma absoluta */
+  bottom: 0; /* Fixa na parte inferior da página */
 }

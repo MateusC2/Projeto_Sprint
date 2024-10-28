@@ -8,4 +8,6 @@ const query = 'SELECT * FROM usuario';
 
 const query = 'UPDATE usuario SET nome = ?, email = ?, telefone = ?, senha = ? WHERE Id_usuario = ?';
 
- const query = 'DELETE FROM usuario WHERE Id_usuario = ?';
+const query = 'DELETE FROM usuario WHERE Id_usuario = ?';
+
+SELECT * FROM usuario WHERE email = ? AND senha = ?

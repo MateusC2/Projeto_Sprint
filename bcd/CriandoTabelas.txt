@@ -1,3 +1,7 @@
+\connect alunods@localhost:3306
+senai@604
+n
+
 create database agenda; 
 use agenda;
 
@@ -25,3 +29,8 @@ CREATE TABLE reserva (
     horario TIME,
     data DATE  
 );
+
+INSERT INTO usuario (nome, email, telefone, senha) VALUES 
+('Arthur Coutinho', 'Arthur@example.com', '11912345678', 'senha123'),
+('Mateus Cubero', 'Mateus@example.com', '16999999999', 'senha123'),
+('Yasmin Souza', 'Yasmin@example.com', '16888888888', 'senha123');

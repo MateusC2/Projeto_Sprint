@@ -1,6 +1,6 @@
 \connect alunods@localhost:3306
 senai@604
-n
+
 
 create database agenda; 
 use agenda;

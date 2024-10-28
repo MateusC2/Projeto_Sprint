@@ -23,7 +23,6 @@ header {
 }
 
 header h3 {
-  width: 100%; /* Define o contêiner como 100% da largura */
   display: flex; /* Usa flexbox para centralização */
   justify-content: center; /* Centraliza horizontalmente o conteúdo */
   margin: 0px; /* Remove margens */

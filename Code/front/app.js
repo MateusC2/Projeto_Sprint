@@ -1,8 +1,10 @@
-//Chamada da função createUser para a associação ao evento de envio a formulário
-document.getElementById("formulario-registro").addEventListener("submit", createUser);
+//Chama a função createUser para a associação ao evento de envio a formulário
+document
+  .getElementById("formulario-registro")
+  .addEventListener("submit", createUser);
 
 function createUser(event) {
-  //Previne o comportamento padrao do formulario, ou seja, impede que ele seja enviado e recarregue a pagona
+  //Previne o comportamento padrao do formulario, ou seja, impede que ele seja enviado e recarregue a pagina
   event.preventDefault();
 
   //Captura os valores dos campos do formularios
@@ -37,8 +39,9 @@ function createUser(event) {
     .then((data) => {
       //executa a resposta de sucesso - retorna ao usuario final
 
-      //Exibe um alerta para o usuario final (front) com o nome que acabou de ser cadastrado
+      //Exibe um alerta para o usuario final (front)
       alert(data.message);
+      window.location.href = "login.html";
       console.log(data.message);
 
       //Reseta os campos do formulario após o sucesso do cadastro

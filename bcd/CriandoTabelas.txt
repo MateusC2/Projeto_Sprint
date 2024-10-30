@@ -1,7 +1,6 @@
 \connect alunods@localhost:3306
 senai@604
 
-
 create database agenda; 
 use agenda;
 
@@ -13,7 +12,7 @@ CREATE TABLE usuario (
     senha VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE salas (
+CREATE TABLE sala (
     id_salas INT PRIMARY KEY AUTO_INCREMENT,
     classificacao VARCHAR(100) NOT NULL,
     horarios_disponiveis datetime NOT NULL,
@@ -25,12 +24,7 @@ CREATE TABLE reserva (
     fkid_usuario INT NOT NULL,
     fkid_sala INT NOT NULL,
     FOREIGN KEY (fkid_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (fkid_sala) REFERENCES salas(id_salas),
+    FOREIGN KEY (fkid_salas) REFERENCES salas(id_salas),
     horario TIME,
     data DATE  
 );
-
-INSERT INTO usuario (nome, email, telefone, senha) VALUES 
-('Arthur Coutinho', 'Arthur@example.com', '11912345678', 'senha123'),
-('Mateus Cubero', 'Mateus@example.com', '16999999999', 'senha123'),
-('Yasmin Souza', 'Yasmin@example.com', '16888888888', 'senha123');

@@ -13,7 +13,7 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE sala (
-    id_salas INT PRIMARY KEY AUTO_INCREMENT,
+    id_sala INT PRIMARY KEY AUTO_INCREMENT,
     classificacao VARCHAR(100) NOT NULL,
     horarios_disponiveis datetime NOT NULL,
     bloco VARCHAR(30) NOT NULL
@@ -21,10 +21,10 @@ CREATE TABLE sala (
 
 CREATE TABLE reserva (
     id_reservas INT AUTO_INCREMENT PRIMARY KEY,
-    fkid_usuario INT NOT NULL,
-    fkid_sala INT NOT NULL,
-    FOREIGN KEY (fkid_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (fkid_salas) REFERENCES salas(id_salas),
+    fk_id_usuario INT NOT NULL,
+    fk_id_sala INT NOT NULL,
+    FOREIGN KEY (fk_id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (fk_id_sala) REFERENCES sala(id_sala),
     horario TIME,
     data DATE  
 );

@@ -8,12 +8,5 @@ router.put('/user', UserController.updateUser);
 router.delete('/user/:id', UserController.deleteUser);
 router.get('/user', UserController.getAllUsers);
 
-//rotas da sala controller
-router.get('/sala', SalaController.listarSalas);
-router.get('/sala/:id', SalaController.getAllSala);
-router.post('/sala', SalaController.createSala);
-router.put('/sala/:id', SalaController.updateSala);
-router.delete('/sala/:id', SalaController.deletarSala);
-
 
 module.exports = router

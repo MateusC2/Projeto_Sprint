@@ -142,7 +142,6 @@ footer {
 
 /* --------------------------- Pagina inicial ---------------------------- */
 
-
 .header-senai {
   display: flex;
   flex-grow: 1;
@@ -183,13 +182,13 @@ footer {
   justify-content: end;
 }
 
-#Div_risco02{
+#Div_risco02 {
   width: 80%;
   height: 100%;
   background-color: #d90000;
 }
 
-.botao-inicio{
+.botao-inicio {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -200,12 +199,45 @@ footer {
   font-size: 22px;
   width: 200px;
   height: 150px;
-  
 }
 
-.botaos-inicial{
+.botaos-inicial {
   display: flex;
   justify-content: center;
   gap: 120px;
   margin-top: 80px;
+}
+
+/* ---------------------Salas--------------------------- */
+
+.texto-sala {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%; /* Largura total da tabela */
+  border-collapse: collapse; /* Remove espaços entre bordas */
+  margin-top: 20px; /* Espaçamento superior */
+}
+
+th,
+td {
+  border: 1px solid #ddd; /* Borda cinza clara */
+  padding: 8px; /* Espaçamento interno */
+  text-align: left; /* Alinhamento à esquerda */
+}
+
+th {
+  background-color: #d90000; /* Cor de fundo para cabeçalho */
+  color: white; /* Cor do texto no cabeçalho */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+tr:hover {
+  background-color: #ddd; /* Cor de fundo ao passar o mouse */
 }

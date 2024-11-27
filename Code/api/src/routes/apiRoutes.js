@@ -1,12 +1,17 @@
-// Importa o módulo Router do express
-// Router será  utiliziado para definir rotas específicas da aplicação
-const router = require('express').Router();
+const router = require("express").Router();
 const UserController = require("../controllers/UserController");
-router.post('/user', UserController.createUser);
-router.post('/userLogin', UserController.loginUser);
-router.put('/user', UserController.updateUser);
-router.delete('/user/:id', UserController.deleteUser);
-router.get('/user', UserController.getAllUsers);
+const SalaController = require("../controllers/SalaController");
 
+router.post("/user", UserController.createUser); // http://localhost:6000/api/v1/user
+router.post("/userLogin", UserController.loginUser); // http://localhost:6000/api/v1/userLogin
+router.put("/user", UserController.updateUser); // http://localhost:6000/api/v1/user
+router.delete("/user/:id", UserController.deleteUser); // http://localhost:6000/api/v1/user/:id
+router.get("/user", UserController.getAllUsers); // http://localhost:6000/api/v1/user
 
-module.exports = router
+// Rotas do SalaController
+router.get("/sala", SalaController.getAllSalas); // http://localhost:6000/api/v1/sala
+router.post("/sala", SalaController.createSalas); // http://localhost:6000/api/v1/sala
+router.put("/sala/:id", SalaController.updateSala); // http://localhost:6000/api/v1/sala/:id
+router.delete("/sala/:id", SalaController.deleteSala); // http://localhost:6000/api/v1/sala/:id
+
+module.exports = router;

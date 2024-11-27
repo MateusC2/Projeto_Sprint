@@ -11,5 +11,5 @@ const corsOpitions = {
 
 //Aplicando o middleware CORS no app
 app.use(cors(corsOpitions));
-//Inicia o servidor na porta 5000, tornando a API acessível em http://localhost:6000
-app.listen(6000);
+//Inicia o servidor na porta 5000, tornando a API acessível em http://localhost:5000
+app.listen(5000);

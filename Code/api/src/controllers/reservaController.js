@@ -1,139 +1,218 @@
-const connect = require("../db/connect");
+const connect = require("../db/connect"); // Importa o módulo de conexão com o banco de dados
 
 module.exports = class reservaController {
   static async createReserva(req, res) {
-    const { fkcpf, fkid_salas, data_hora, duracao } = req.body;
+    // Extrai os dados do corpo da requisição
+    const { fk_id_usuario, fk_id_sala, datahora_inicio, datahora_fim } =
+      req.body;
 
-    // Validação de campos obrigatórios
-    if (!fkcpf || !fkid_salas || !data_hora || !duracao) {
-        return res.status(400).json({ error: "Todos os campos obrigatórios devem ser preenchidos" });
+    // Valida se todos os campos obrigatórios estão preenchidos
+    if (!fk_id_usuario || !fk_id_sala || !datahora_inicio || !datahora_fim) {
+      return res
+        .status(400)
+        .json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    // Conversão de data_hora e cálculo de horário de fim
-    const inicio = new Date(data_hora).getTime(); // Convertendo data_hora para milissegundos
-    const duracaoArray = duracao.split(":").map(Number); // Dividindo duração em horas, minutos e segundos
-    const duracaoMs = ((duracaoArray[0] * 60 + duracaoArray[1]) * 60 + duracaoArray[2]) * 1000; // Convertendo para milissegundos
-    const fim = inicio + duracaoMs; // Calculando o horário de fim em milissegundos
+    const queryUsuario = `SELECT * FROM usuario WHERE id_usuario = ?`;
+    const valuesUsuario = [fk_id_usuario];
 
-    // Query para buscar reservas existentes na mesma sala e validar conflitos
-    const queryCheck = `
-        SELECT * FROM reservas 
-        WHERE fkid_salas = ?
-    `;
+    const querySala = `SELECT * FROM sala WHERE id_sala = ?`;
+    const valuesSala = [fk_id_sala];
 
-    const queryInsert = `
-        INSERT INTO reservas (fkcpf, fkid_salas, data_hora, duracao) 
-        VALUES (?, ?, ?, ?)
-    `;
+    // A consulta SQL agora verifica se já existe uma reserva que se sobreponha
+    const queryHorario = `SELECT datahora_inicio, datahora_fim FROM reserva WHERE fk_id_sala = ? AND (
+        (datahora_inicio < ? AND datahora_fim > ?) OR  -- Novo horário começa antes e termina depois da reserva existente
+        (datahora_inicio < ? AND datahora_fim > ?) OR  -- Novo horário começa antes e termina depois da reserva existente
+        (datahora_inicio >= ? AND datahora_inicio < ?) OR  -- Novo horário começa dentro de um horário já reservado
+        (datahora_fim > ? AND datahora_fim <= ?) -- Novo horário termina dentro de um horário já reservado
+      )`;
 
-    try {
-        // Buscar reservas existentes na mesma sala
-        connect.query(queryCheck, [fkid_salas], function (err, results) {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({ error: "Erro ao verificar a disponibilidade da sala" });
-            }
+    const valuesHorario = [
+      fk_id_sala,
+      datahora_inicio,
+      datahora_inicio,
+      datahora_inicio,
+      datahora_fim,
+      datahora_inicio,
+      datahora_fim,
+      datahora_inicio,
+      datahora_fim,
+    ];
 
-            // Verificar conflitos manualmente
-            for (const reserva of results) {
-                const reservaInicio = new Date(reserva.data_hora).getTime(); // Convertendo data_hora do banco para milissegundos
-                const reservaDuracao = reserva.duracao.split(":").map(Number); // Dividindo a duração do banco
-                const reservaDuracaoMs = ((reservaDuracao[0] * 60 + reservaDuracao[1]) * 60 + reservaDuracao[2]) * 1000; // Convertendo para ms
-                const reservaFim = reservaInicio + reservaDuracaoMs; // Calculando horário de fim da reserva
+    connect.query(queryHorario, valuesHorario, (err, resultadosH) => {
+      if (err) {
+        return res.status(500).json({ error: "Erro ao verificar horário" });
+      }
 
-                // Verificar se há sobreposição de horários
-                if ((inicio >= reservaInicio && inicio < reservaFim) || // Início está dentro de outra reserva
-                    (fim > reservaInicio && fim <= reservaFim) ||       // Fim está dentro de outra reserva
-                    (reservaInicio >= inicio && reservaFim <= fim)) {   // Outra reserva está completamente dentro da nova
-                    return res.status(409).json({ error: "A sala já está reservada nesse horário" });
-                }
-            }
-
-            // Inserir a reserva no banco de dados
-            connect.query(queryInsert, [fkcpf, fkid_salas, data_hora, duracao], function (err) {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).json({ error: "Erro ao criar a reserva" });
-                }
-                return res.status(201).json({ message: "Reserva criada com sucesso" });
-            });
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: "Erro interno do servidor" });
-    }
-}
-
-
-  static async getAllReservas(req, res) {
-    const query = `SELECT * FROM reservas`;
-
-    try {
-      connect.query(query, function (err, results) {
+      connect.query(queryUsuario, valuesUsuario, (err, resultadosU) => {
         if (err) {
-          console.error(err);
-          return res.status(500).json({ error: "Erro interno do servidor" });
+          return res.status(500).json({ error: "Erro ao buscar usuário" });
         }
-        return res
-          .status(200)
-          .json({ message: "Lista de Reservas", reservas: results });
+
+        connect.query(querySala, valuesSala, (err, resultadosS) => {
+          if (err) {
+            return res.status(500).json({ error: "Erro ao buscar sala" });
+          }
+
+          if (resultadosU.length === 0) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
+          }
+
+          if (resultadosS.length === 0) {
+            return res.status(404).json({ error: "Sala não encontrada" });
+          }
+
+          if (
+            new Date(datahora_fim).getTime() <
+            new Date(datahora_inicio).getTime()
+          ) {
+            return res.status(400).json({ error: "Data ou Hora da Inválida" });
+          }
+
+          if (
+            new Date(datahora_fim).getTime() ===
+            new Date(datahora_inicio).getTime()
+          ) {
+            return res.status(400).json({ error: "Data ou Hora da Inválida" });
+          }
+
+          const limiteHora = 60 * 60 * 1000; // 1 hora em milissegundos
+          if (new Date(datahora_fim) - new Date(datahora_inicio) > limiteHora) {
+            return res
+              .status(400)
+              .json({ error: "O tempo de Reserva excede o limite (1h)" });
+          }
+
+          // Se houver qualquer reserva que se sobreponha
+          if (resultadosH.length > 0) {
+            return res.status(400).json({
+              error: "A sala escolhida já está reservada neste horário",
+            });
+          }
+
+          const queryInsert = `INSERT INTO reserva (fk_id_usuario, fk_id_sala, datahora_inicio, datahora_fim)
+                              VALUES (?, ?, ?, ?)`;
+          const valuesInsert = [
+            fk_id_usuario,
+            fk_id_sala,
+            datahora_inicio,
+            datahora_fim,
+          ];
+
+          // Realiza o agendamento (inserção)
+          connect.query(queryInsert, valuesInsert, (err, results) => {
+            if (err) {
+              return res.status(500).json({ error: "Erro ao criar reserva" });
+            }
+
+            return res
+              .status(201)
+              .json({ message: "Sala reservada com sucesso!" });
+          });
+        });
       });
-    } catch (error) {
-      console.error("Erro ao executar consulta:", error);
-      return res.status(500).json({ error: "Erro interno do servidor" });
-    }
+    });
+  }
+
+  static async getAllReserva(req, res) {
+    const query = `SELECT * FROM reserva`;
+
+    connect.query(query, (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro Interno do Servidor" });
+      }
+      return res
+        .status(200)
+        .json({ message: "Obtendo todas as reservas", reservas: results });
+    });
   }
 
   static async updateReserva(req, res) {
-    const { id_reserva, fkcpf, fkid_salas, data_hora, duracao } = req.body;
+    const { datahora_inicio, datahora_fim } = req.body;
+    const reservaId = req.params.id_reserva;
 
-    if (!id_reserva || !fkcpf || !fkid_salas || !data_hora || !duracao) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
+    // Valida se todos os campos obrigatórios estão preenchidos
+    if (!datahora_inicio || !datahora_fim) {
+      return res
+        .status(400)
+        .json({ error: "Todos os campos devem ser preenchidos" });
     }
 
-    const queryUpdate = `
-      UPDATE reservas 
-      SET fkcpf=?, fkid_salas=?, data_hora=?, duracao=? 
-      WHERE id_reserva = ?
-    `;
-    const values = [fkcpf, fkid_salas, data_hora, duracao, id_reserva];
+    const queryHorario = `SELECT datahora_inicio, datahora_fim FROM reserva WHERE id_reserva = ? AND (
+      (datahora_inicio < ? AND datahora_fim > ?) OR  -- Novo horário começa antes e termina depois da reserva existente
+      (datahora_inicio < ? AND datahora_fim > ?) OR  -- Novo horário começa antes e termina depois da reserva existente
+      (datahora_inicio >= ? AND datahora_inicio < ?) OR  -- Novo horário começa dentro de um horário já reservado
+      (datahora_fim > ? AND datahora_fim <= ?) -- Novo horário termina dentro de um horário já reservado
+    )`;
 
-    try {
-      connect.query(queryUpdate, values, function (err, results) {
+    const valuesHorario = [
+      reservaId,
+      datahora_inicio,
+      datahora_inicio,
+      datahora_inicio,
+      datahora_fim,
+      datahora_inicio,
+      datahora_fim,
+      datahora_inicio,
+      datahora_fim,
+    ];
+
+    // Query para atualizar os dados do usuário
+    const queryUpdate = `UPDATE reserva SET datahora_inicio = ?, datahora_fim = ? WHERE id_reserva = ?`;
+    const valuesUpdate = [datahora_inicio, datahora_fim, reservaId];
+
+    connect.query(queryHorario, valuesHorario, (err, resultadosH) => {
+      if (err) {
+        return res.status(500).json({ error: "Erro ao verificar horário" });
+      }
+
+      if (new Date(datahora_fim) < new Date(datahora_inicio)) {
+        return res.status(400).json({ error: "Data ou Hora da Inválida" });
+      }
+
+      const limiteHora = 60 * 60 * 1000; // 1 hora em milissegundos
+      if (new Date(datahora_fim) - new Date(datahora_inicio) > limiteHora) {
+        return res
+          .status(400)
+          .json({ error: "O tempo de Reserva excede o limite (1h)" });
+      }
+
+      // Se houver qualquer reserva que se sobreponha
+      if (resultadosH.length > 0) {
+        return res
+          .status(400)
+          .json({ error: "A sala escolhida já está reservada neste horário" });
+      }
+
+      connect.query(queryUpdate, valuesUpdate, (err, results) => {
         if (err) {
-          console.error(err);
-          return res.status(500).json({ error: "Erro interno do servidor" });
+          return res.status(500).json({ error: "Erro ao atualizar reserva" });
         }
-        if (results.affectedRows === 0) {
-          return res.status(404).json({ message: "Reserva não encontrada" });
-        }
-        return res.status(200).json({ message: "Reserva atualizada com sucesso" });
+
+        return res
+          .status(201)
+          .json({ message: "Sala atualizada com sucesso!" });
       });
-    } catch (error) {
-      console.error("Erro ao executar consulta:", error);
-      return res.status(500).json({ error: "Erro interno do servidor" });
-    }
+    });
   }
 
   static async deleteReserva(req, res) {
-    const reservaId = req.params.id;
-    const queryDelete = `DELETE FROM reservas WHERE id_reserva=?`;
+    const reservaId = req.params.id_reserva;
+    const query = `DELETE FROM reserva WHERE id_reserva = ?`;
     const values = [reservaId];
 
-    try {
-      connect.query(queryDelete, values, function (err, results) {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({ error: "Erro interno no servidor" });
-        }
-        if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Reserva não encontrada" });
-        }
-        return res.status(200).json({ message: "Reserva excluída com sucesso" });
-      });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro interno do servidor" });
-    }
+    connect.query(query, values, (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro interno no servidor" });
+      }
+
+      // Verifica se o usuário foi encontrado e excluído
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Reserva não encontrada" });
+      }
+      return res.status(200).json({ message: "Reserva excluída com sucesso" });
+    });
   }
 };

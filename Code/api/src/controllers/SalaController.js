@@ -1,128 +1,82 @@
-const connect = require("../db/connect"); // Importa o módulo de conexão com o banco de dados
+const Sala = require("../db/connect"); 
 
-module.exports = class salaController {
-  // Método para criar uma nova sala
-  static async createSalas(req, res) {
-    const { horarios_disponiveis, classificacao, bloco } = req.body;
-
-    // Valida se todos os campos obrigatórios estão preenchidos
-    if (!horarios_disponiveis || !classificacao || !bloco) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
-    }
-
-    // Query para inserir a nova sala no banco de dados
-    const query = `INSERT INTO sala (horarios_disponiveis, classificacao, bloco) VALUES (?, ?, ?)`;
-    const values = [horarios_disponiveis, classificacao, bloco];
-
-    try {
-      connect.query(query, values, function (err) {
-        if (err) {
-          console.error(err);
-          if (err.code === "ER_DUP_ENTRY") {
-            return res.status(400).json({
-              error: "O nome da sala já existe",
-            });
-          }
-          return res.status(500).json({ error: "Erro Interno do Servidor" });
-        }
-        return res.status(201).json({ message: "Sala Criada com Sucesso!" });
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Erro Interno do Servidor" });
-    }
+// Função para listar todas as salas
+async function listarSalas(req, res) {
+  try {
+    const salas = await Sala.find();
+    res.status(200).json(salas);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
+}
 
-  // Método para obter todas as salas
-  static async getAllSalas(req, res) {
-    const query = `SELECT * FROM sala`;
-
-    try {
-      connect.query(query, function (err, results) {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({ error: "Erro Interno do Servidor" });
-        }
-        return res
-          .status(200)
-          .json({ message: "Obtendo todas as salas", salas: results });
-      });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro Interno do Servidor" });
+// Função para buscar uma sala por ID
+async function getAllSala(req, res) {
+  try {
+    const sala = await Sala.findById(req.params.id);
+    if (sala == null) {
+      return res.status(404).json({ message: "Sala não encontrada" });
     }
+    res.status(200).json(sala);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
+}
 
-  // Método para atualizar os dados de uma sala
-  static async updateSala(req, res) {
-    const { horarios_disponiveis, classificacao, bloco } = req.body;
-    const salaId = req.params.id_sala;
+// Função para criar uma nova sala
+async function createSala(req, res) {
+  const sala = new Sala({
+    horarios_disponiveis: req.body.horarios_disponiveis,
+    classificacao: req.body.classificacao,
+  });
 
-    // Valida se todos os campos obrigatórios estão preenchidos
-    if (!horarios_disponiveis || !classificacao || !bloco) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
-    }
-
-    // Query para atualizar os dados de uma sala
-    const query = `UPDATE sala SET horarios_disponiveis = ?, classificacao = ?, bloco = ? WHERE id_sala = ?`;
-    const values = [horarios_disponiveis, classificacao, bloco, salaId];
-
-    try {
-      connect.query(query, values, function (err, results) {
-        if (err) {
-          console.error(err);
-          if (err.code === "ER_DUP_ENTRY") {
-            return res.status(400).json({
-              error: "O nome da sala já existe",
-            });
-          }
-          return res.status(500).json({ error: "Erro Interno do Servidor" });
-        }
-
-        // Verifica se a sala foi encontrada e atualizada
-        if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Sala não encontrada" });
-        }
-        return res.status(200).json({ message: "Sala atualizada com sucesso" });
-      });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro Interno do Servidor" });
-    }
+  try {
+    const novaSala = await sala.save();
+    res.status(201).json(novaSala);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
+}
 
-  // Método para excluir uma sala
-  static async deleteSala(req, res) {
-    const salaId = req.params.id_sala;
-    const query = `DELETE FROM sala WHERE id_sala = ?`;
-    const values = [salaId];
-
-    try {
-      connect.query(query, values, function (err, results) {
-        if (err) {
-          if (err.code === "ER_ROW_IS_REFERENCED_2") {
-            return res.status(400).json({
-              error:
-                "A sala está vinculada a uma reserva, e não pode ser excluída",
-            });
-          }
-          console.error(err);
-          return res.status(500).json({ error: "Erro Interno do Servidor" });
-        }
-
-        // Verifica se a sala foi encontrada e excluída
-        if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Sala não encontrada" });
-        }
-        return res.status(200).json({ message: "Sala excluída com sucesso" });
-      });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro Interno do Servidor" });
+// Função para atualizar uma sala existente
+async function updateSala(req, res) {
+  try {
+    const sala = await Sala.findById(req.params.id);
+    if (sala == null) {
+      return res.status(404).json({ message: "Sala não encontrada" });
     }
+
+    // Atualizar os campos da sala
+    sala.horarios_disponiveis =
+      req.body.horarios_disponiveis || sala.horarios_disponiveis;
+    sala.classificacao = req.body.classificacao || sala.classificacao;
+
+    const salaAtualizada = await sala.save();
+    res.status(200).json(salaAtualizada);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
+}
+
+// Função para deletar uma sala
+async function deleteSala(req, res) {
+  try {
+    const sala = await Sala.findById(req.params.id);
+    if (sala == null) {
+      return res.status(404).json({ message: "Sala não encontrada" });
+    }
+
+    await sala.remove();
+    res.status(200).json({ message: "Sala deletada com sucesso" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = {
+  listarSalas,
+  getAllSala,
+  createSala,
+  updateSala,
+  deleteSala,
 };

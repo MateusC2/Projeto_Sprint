@@ -11,10 +11,9 @@ router.delete('/user/:id', UserController.deleteUser); // http://localhost:5000/
 router.get('/user', UserController.getAllUsers); // http://localhost:5000/api/v1/user
 
 // Rotas do SalaController
-router.get('/sala', SalaController.listarSalas); // http://localhost:5000/api/v1/sala
-router.get('/sala/:id', SalaController.getAllSala); // http://localhost:5000/api/v1/sala/:id
-router.post('/sala', SalaController.createSala); // http://localhost:5000/api/v1/sala
-router.put('/sala/:id', SalaController.updateSala); // http://localhost:5000/api/v1/sala/:id
-router.delete('/sala/:id', SalaController.deleteSala); // http://localhost:5000/api/v1/sala/:id
+router.get("/sala", SalaController.getAllSalas); // http://localhost:5000/api/v1/sala
+router.post("/sala", SalaController.createSalas); // http://localhost:5000/api/v1/sala
+router.put("/sala/:id_sala", SalaController.updateSala); // http://localhost:5000/api/v1/sala/:id
+router.delete("/sala/:id", SalaController.deleteSala); // http://localhost:5000/api/v1/sala/:id
 
 module.exports = router;

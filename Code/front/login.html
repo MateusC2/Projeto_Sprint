@@ -10,10 +10,7 @@
   </head>
   <body>
     <!--Tag semântica de cabeçalho-->
-    <header>
-      <h3>Página Login</h3>
-      <button onclick="window.location.href='index.html'" class="botao-loginHome">Home</button>
-    </header>
+    <header></header>
 
     <!--tag semântica para organização do conteúdo do site-->
     <main>
@@ -23,20 +20,36 @@
         <form id="login-form">
           <h2>Login</h2>
           <label for="email"></label>
-          <input type="text" placeholder="Email" class="input-box" id="email" name="email" required/>
+          <input
+            type="text"
+            placeholder="Email"
+            class="input-box"
+            id="email"
+            name="email"
+            required
+          />
           <br />
 
           <label for="senha"></label>
-          <input type="password" placeholder="Senha" class="input-box" id="senha" name="senha" required/>
+          <input
+            type="password"
+            placeholder="Senha"
+            class="input-box"
+            id="senha"
+            name="senha"
+            required
+          />
           <br />
 
           <button type="submit" class="login-button">Entrar</button>
           <br />
-          
+
           <h5 class="login-nnsenha">Não tem uma conta ?</h5>
           <h5
             onclick="window.location.href='cadastro.html'"
-            class="login-nsenha">Cadastra-se
+            class="login-nsenha"
+          >
+            Cadastre-se
           </h5>
         </form>
       </section>
@@ -45,6 +58,6 @@
     <footer>
       <p>&copy;Desenvolvido por:Yasmin, Mateus e Arthur</p>
     </footer>
-    <script src="app.js"></script>
+    <script src="appUser.js"></script>
   </body>
 </html>

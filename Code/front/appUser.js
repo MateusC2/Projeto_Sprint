@@ -1,10 +1,17 @@
-//Chama a função createUser para a associação ao evento de envio a formulário
-document
-  .getElementById("formulario-registro")
-  .addEventListener("submit", createUser);
+// Adiciona o ouvinte de evento para o formulário de registro
+const formularioRegistro = document.getElementById("formulario-registro");
+if (formularioRegistro) {
+  console.log(formularioRegistro);
+  formularioRegistro.addEventListener("submit", createUser);
+}
 
-document.addEventListener("DOMContentLoaded", createUser);
-document.addEventListener("DOMContentLoaded", loginUser);
+// Adiciona o ouvinte de evento para o formulário de login
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+  console.log(formularioRegistro, loginForm);
+  loginForm.addEventListener("submit", loginUser);
+}
+
 function createUser(event) {
   //Previne o comportamento padrao do formulario, ou seja, impede que ele seja enviado e recarregue a pagina
   event.preventDefault();
@@ -64,6 +71,7 @@ function loginUser(event) {
   // Captura os valores dos campos de email e senha no formulário
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
+
 
   // Realiza uma requisição POST para a API de login
   fetch("http://localhost:5000/api/v1/userLogin", {

@@ -19,20 +19,14 @@ body {
 header {
   margin: 0px; /* Remove a margem */
   background-color: #c4c4c4; /* Define cor de fundo cinza claro */
-  padding: 30px; /* Adiciona padding ao redor do conteúdo */
-}
-
-header h3 {
-  display: flex; /* Usa flexbox para centralização */
-  justify-content: center; /* Centraliza horizontalmente o conteúdo */
-  margin: 0px; /* Remove margens */
+  padding: 25px;
 }
 
 /* Estilos para o botão de login na home */
 .botao-loginHome {
   position: absolute; /* Posiciona o botão de forma absoluta */
   right: 30px; /* Posiciona o botão à direita */
-  top: 20px; /* Define a distância do topo */
+  top: 7px; /* Define a distância do topo */
   background-color: red; /* Define a cor de fundo */
   color: white; /* Define a cor do texto */
   border: none; /* Remove a borda */
@@ -68,16 +62,6 @@ main img {
   padding: 10px;
   border-radius: 0px;
   padding-bottom: 10px;
-}
-
-/* Estilos para a seção "home" */
-#home {
-  background-color: #c4c4c4;
-  width: 30%; /* Define a largura do elemento */
-  padding: 20px;
-  border-radius: 10px; /* Arredonda os cantos */
-  padding-bottom: 40px;
-  margin: 50px auto; /* Centraliza e adiciona margem superior */
 }
 
 /* Estilos para a seção de login */
@@ -119,7 +103,7 @@ main img {
   padding: 5px;
   width: 50%; /* Define a largura do botão */
   padding-bottom: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
 }
@@ -154,4 +138,74 @@ footer {
   width: 100%; /* Define o rodapé para ocupar toda a largura */
   position: absolute; /* Posiciona de forma absoluta */
   bottom: 0; /* Fixa na parte inferior da página */
+}
+
+/* --------------------------- Pagina inicial ---------------------------- */
+
+
+.header-senai {
+  display: flex;
+  flex-grow: 1;
+  width: 150px;
+  height: auto;
+  padding: auto;
+  border: 100px;
+  margin-top: 20px;
+}
+
+.header-inicial {
+  background-color: #d9d9d9;
+  position: relative;
+}
+
+.footer-inicial {
+  background-color: #d90000;
+}
+
+.body-inicial {
+  background-color: #f5f5f5;
+}
+
+.header-vermelho {
+  width: 100%;
+  height: 30px; /* Altura da barra vermelha */
+  background-color: #d90000; /* Cor da barra */
+  position: absolute;
+  top: 0; /* Posiciona no topo do header */
+  left: 0;
+}
+
+#Div_risco {
+  width: 100vw;
+  height: 2px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+}
+
+#Div_risco02{
+  width: 80%;
+  height: 100%;
+  background-color: #d90000;
+}
+
+.botao-inicio{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  font-size: 22px;
+  width: 200px;
+  height: 150px;
+  
+}
+
+.botaos-inicial{
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+  margin-top: 80px;
 }

@@ -15,16 +15,16 @@ CREATE TABLE usuario (
 CREATE TABLE sala (
     id_sala INT PRIMARY KEY AUTO_INCREMENT,
     classificacao VARCHAR(100) NOT NULL,
-    horarios_disponiveis datetime NOT NULL,
+    horarios_disponiveis varchar(255)NOT NULL,
     bloco VARCHAR(30) NOT NULL
 );
 
 create table reserva(
      id_reserva int primary key auto_increment,
-     fk_id_sala int not null,
      fk_id_usuario int not null,
+     fk_id_sala int not null,
      datahora_inicio datetime not null, 
      datahora_fim datetime not null,
      foreign key (fk_id_sala) references sala(id_sala),
      foreign key (fk_id_usuario) references usuario(id_usuario)
- );
+);

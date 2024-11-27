@@ -8,5 +8,12 @@ router.put('/user', UserController.updateUser);
 router.delete('/user/:id', UserController.deleteUser);
 router.get('/user', UserController.getAllUsers);
 
+const reservaController = require("../controllers/UserController");
+router.post('/user', UserController.createUser);
+router.post('/userLogin', UserController.loginUser);
+router.put('/user', UserController.updateUser);
+router.delete('/user/:id', UserController.deleteUser);
+router.get('/user', UserController.getAllUsers);
+
 
 module.exports = router

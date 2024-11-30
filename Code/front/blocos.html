@@ -16,29 +16,31 @@
           <a href="login.html" class="sair-inicio">Sair</a>
         </div>
       </div>
+      <button
+        type="button"
+        class="botao-perfil"
+        onclick="window.location.href='salas.html'"
+      >
+        <img src="person.png" alt="img" class="imagem-botao-perfil" />
+        Perfil
+      </button>
     </header>
     <div id="Div_risco">
       <div id="Div_risco02"></div>
     </div>
-    <h1 class="texto-sala">Salas</h1>
 
     <main>
-      <section>
-        <table id="sala-table">
-          <thead>
-            <th>Horários</th>
-            <th>Classificação</th>
-            <th>Bloco</th>
-          </thead>
-
-          <tbody id="sala-list-tabela"></tbody>
-        </table>
+      <!--primeira seção do conteúdo-->
+      <section class="blocos">
+        <div class="bloco">A</div>
+        <div class="bloco">B</div>
+        <div class="bloco">C</div>
+        <div class="bloco">D</div>
       </section>
     </main>
 
     <footer class="footer-inicial">
       <p>&copy;Desenvolvido por:Yasmin,Mateus e Arthur</p>
     </footer>
-    <script src="appSala.js"></script>
   </body>
 </html>

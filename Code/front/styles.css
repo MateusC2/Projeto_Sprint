@@ -8,7 +8,7 @@
 /* Estiliza o corpo principal da página */
 body {
   font-family: Arial, sans-serif; /* Define a fonte padrão como Arial com fallback para sans-serif */
-  background-color: #d90000; /* Define a cor de fundo do body em vermelho */
+  background-color: #d9d9d9a9; /* Define a cor de fundo do body em vermelho */
   color: #333; /* Define a cor do texto */
   min-height: 100vh; /* Define altura mínima de 100% da viewport */
   position: relative; /* Posiciona o body para o rodapé absoluto */
@@ -18,7 +18,7 @@ body {
 /* Estilos para o cabeçalho */
 header {
   margin: 0px; /* Remove a margem */
-  background-color: #c4c4c4; /* Define cor de fundo cinza claro */
+  background-color: #d90000; /* Define cor de fundo cinza claro */
   padding: 25px;
 }
 
@@ -132,7 +132,7 @@ main section h2 {
 
 /* Estilo do rodapé */
 footer {
-  background-color: #c4c4c4;
+  background-color: #d90000;
   text-align: center;
   padding: 15px;
   width: 100%; /* Define o rodapé para ocupar toda a largura */
@@ -165,13 +165,45 @@ footer {
   background-color: #f5f5f5;
 }
 
+.botao-perfil {
+  display: flex;
+  background-color: #ebebeb;
+  justify-content: center; /* Alinha o conteúdo (texto ou ícone) no centro */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  width: 95px;
+  height: 30px; /* Ajuste o tamanho do botão */
+  position: absolute;
+  top: 65%; /* Coloca o botão no meio da altura disponível */
+  right: 20px; /* Posiciona o botão a 10px da borda direita da tela */
+  margin-top: -15px; /* Ajusta a posição para centralizar o botão verticalmente */
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.imagem-botao-perfil {
+  width: 30px;
+  height: 30px;
+}
+
 .header-vermelho {
+  display: flex;
+  justify-content: end;
   width: 100%;
   height: 30px; /* Altura da barra vermelha */
   background-color: #d90000; /* Cor da barra */
   position: absolute;
-  top: 0; /* Posiciona no topo do header */
+  top: 0;
   left: 0;
+}
+
+.sair-inicio {
+  color: aliceblue;
+  top: 15%;
+  margin-right: 20px;
+  margin-top: 6px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 #Div_risco {
@@ -190,15 +222,21 @@ footer {
 
 .botao-inicio {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #d9d9d9;
-  border: 1px solid #d9d9d9;
+  background-color: #b3b3b3b7;
+  border: none;
   border-radius: 10px;
   font-size: 22px;
   width: 200px;
   height: 150px;
+  cursor: pointer;
+}
+
+.imagem-botao {
+  width: 100px;
+  height: 100px;
 }
 
 .botaos-inicial {
@@ -240,4 +278,26 @@ tr:nth-child(even) {
 
 tr:hover {
   background-color: #ddd; /* Cor de fundo ao passar o mouse */
+}
+
+/* -------------------------Blocos------------------------------ */
+.bloco {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #b3b3b3b7;
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.blocos {
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+  margin-top: 80px;
 }

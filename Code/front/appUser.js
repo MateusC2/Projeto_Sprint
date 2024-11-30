@@ -72,7 +72,6 @@ function loginUser(event) {
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
-
   // Realiza uma requisição POST para a API de login
   fetch("http://localhost:5000/api/v1/userLogin", {
     method: "POST", // Define o método da requisição como POST

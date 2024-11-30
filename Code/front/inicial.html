@@ -11,7 +11,19 @@
     <!--Tag semântica de cabeçalho-->
     <header class="header-inicial">
       <img class="header-senai" src="senaisplogo.png" alt="Logo SENAI SP" />
-      <div class="header-vermelho"></div>
+      <div class="header-vermelho">
+        <div class="sair-inicio">
+          <a href="login.html" class="sair-inicio">Sair</a>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="botao-perfil"
+        onclick="window.location.href='salas.html'"
+      >
+        <img src="person.png" alt="img" class="imagem-botao-perfil" />
+        Perfil
+      </button>
     </header>
     <div id="Div_risco">
       <div id="Div_risco02"></div>
@@ -25,6 +37,7 @@
           class="botao-inicio"
           onclick="window.location.href='salas.html'"
         >
+          <img src="salas.png" alt="Imagem do botão" class="imagem-botao" />
           Salas
         </button>
         <button
@@ -32,6 +45,7 @@
           class="botao-inicio"
           onclick="window.location.href='' "
         >
+          <img src="person.png" alt="Imagem do botão" class="imagem-botao" />
           Minhas Reservas
         </button>
       </section>

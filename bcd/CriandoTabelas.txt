@@ -1,4 +1,4 @@
-\connect alunods@localhost:3306
+\connect alunods@10.89.240.86:3306
 senai@604
 
 create database agenda; 

@@ -1,7 +1,7 @@
 -- Povoando a tabela usuarios
 INSERT INTO usuario (nome, email, telefone, senha) VALUES 
 ('Arthur Coutinho', 'Arthur@example.com', '11912345678', 'senha123'),
-('Mateus Cubero', 'Mateus@example.com', '16999999999', 'senha123'),
+('Mateus Cubeiro', 'Mateus@example.com', '16999999999', 'senha123'),
 ('Yasmin Souza', 'Yasmin@example.com', '16888888888', 'senha123');
 
 -- Povoando a tabela sala

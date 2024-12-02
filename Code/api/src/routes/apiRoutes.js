@@ -26,5 +26,6 @@ router.post('/reserva', reservaController.createReserva); // http://localhost:50
 router.put("/reserva/:id", reservaController.updateReserva); // http://localhost:5000/api/v1/reserva/:id
 router.delete('/reserva/:id', reservaController.deleteReserva); // http://localhost:5000/api/v1/reserva/:id
 router.get('/reserva', reservaController.getAllReserva); // http://localhost:5000/api/v1/reserva
+router.get('/reserva/:id', reservaController.getReservaByUsuario); // http://localhost:5000/api/v1/reserva/:id
 
 module.exports = router;

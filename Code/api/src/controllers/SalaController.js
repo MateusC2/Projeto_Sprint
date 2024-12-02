@@ -12,11 +12,9 @@ module.exports = class salaController {
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
     if (bloco !== "A" && bloco !== "B" && bloco !== "C" && bloco !== "D") {
-      return res
-        .status(400)
-        .json({
-          error: "Valores inválidos, para blocos digite 'A', 'B', 'C', 'D'",
-        });
+      return res.status(400).json({
+        error: "Valores inválidos, para blocos digite 'A', 'B', 'C', 'D'",
+      });
     }
 
     // Query para inserir a nova sala no banco de dados
@@ -156,6 +154,11 @@ module.exports = class salaController {
       return res
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
+    }
+    if (bloco !== "A" && bloco !== "B" && bloco !== "C" && bloco !== "D") {
+      return res.status(400).json({
+        error: "Valores inválidos, para blocos digite 'A', 'B', 'C', 'D'",
+      });
     }
 
     // Query para atualizar os dados de uma sala

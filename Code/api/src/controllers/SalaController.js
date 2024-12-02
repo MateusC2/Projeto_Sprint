@@ -11,6 +11,13 @@ module.exports = class salaController {
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
+    if (bloco !== "A" && bloco !== "B" && bloco !== "C" && bloco !== "D") {
+      return res
+        .status(400)
+        .json({
+          error: "Valores inválidos, para blocos digite 'A', 'B', 'C', 'D'",
+        });
+    }
 
     // Query para inserir a nova sala no banco de dados
     const query = `INSERT INTO sala (horarios_disponiveis, classificacao, bloco) VALUES (?, ?, ?)`;
@@ -38,6 +45,90 @@ module.exports = class salaController {
   // Método para obter todas as salas
   static async getAllSalas(req, res) {
     const query = `SELECT * FROM sala`;
+
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro Interno do Servidor" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Obtendo todas as salas", salas: results });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro Interno do Servidor" });
+    }
+  }
+
+  // Bloco A
+
+  static async getAllSalasA(req, res) {
+    const query = `SELECT classificacao, horarios_disponiveis, bloco FROM sala WHERE bloco = 'A'`;
+
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro Interno do Servidor" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Obtendo todas as salas", salas: results });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro Interno do Servidor" });
+    }
+  }
+
+  // Bloco B
+
+  static async getAllSalasB(req, res) {
+    const query = `SELECT classificacao, horarios_disponiveis, bloco FROM sala WHERE bloco = 'B'`;
+
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro Interno do Servidor" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Obtendo todas as salas", salas: results });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro Interno do Servidor" });
+    }
+  }
+
+  // Bloco C
+
+  static async getAllSalasC(req, res) {
+    const query = `SELECT classificacao, horarios_disponiveis, bloco FROM sala WHERE bloco = 'C'`;
+
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro Interno do Servidor" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Obtendo todas as salas", salas: results });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro Interno do Servidor" });
+    }
+  }
+
+  // Bloco D
+
+  static async getAllSalasD(req, res) {
+    const query = `SELECT classificacao, horarios_disponiveis, bloco FROM sala WHERE bloco = 'D'`;
 
     try {
       connect.query(query, function (err, results) {

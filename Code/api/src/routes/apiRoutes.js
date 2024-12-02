@@ -13,6 +13,10 @@ router.get('/user', UserController.getAllUsers); // http://localhost:5000/api/v1
 
 // Rotas da SalaController
 router.get("/sala", SalaController.getAllSalas); // http://localhost:5000/api/v1/sala
+router.get("/blocoA", SalaController.getAllSalasA);// http://localhost:5000/api/v1/blocoA
+router.get("/blocoB", SalaController.getAllSalasB);// http://localhost:5000/api/v1/blocoB
+router.get("/blocoC", SalaController.getAllSalasC);// http://localhost:5000/api/v1/blocoC
+router.get("/blocoD", SalaController.getAllSalasD);// http://localhost:5000/api/v1/blocoD
 router.post("/sala", SalaController.createSalas); // http://localhost:5000/api/v1/sala
 router.put("/sala/:id_sala", SalaController.updateSala); // http://localhost:5000/api/v1/sala/:id
 router.delete("/sala/:id_sala", SalaController.deleteSala); // http://localhost:5000/api/v1/sala/:id

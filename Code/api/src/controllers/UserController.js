@@ -133,7 +133,7 @@ module.exports = class userController {
       return res.status(500).json({ erro: "Erro interno do servidor" });
     }
   }
-  
+
   static async getAllUsers(req, res) {
     const query = `SELECT * FROM usuario`;
 

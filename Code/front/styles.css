@@ -283,21 +283,59 @@ tr:hover {
 /* -------------------------Blocos------------------------------ */
 .bloco {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #b3b3b3b7;
   border: none;
   border-radius: 10px;
   font-size: 22px;
-  width: 200px;
-  height: 150px;
+  width: 250px;
+  height: 180px;
   cursor: pointer;
 }
 
 .blocos {
   display: flex;
+  flex-wrap: wrap;         
+  justify-content: space-between;  
+  gap: 50px;              
+  margin-top: 40px;
+  width: 100%;            
+  max-width: 600px;      
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.barra-vermelha{
+  display: flex;
   justify-content: center;
-  gap: 120px;
-  margin-top: 80px;
+  align-items: center;
+  background-color: #d90000;
+  width: 180px;
+  height: 30px;
+  border-radius: 10px;
+  color: #f2f2f2;
+  position: absolute;
+  top: 270px;
+}
+
+.letra-bloco{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9d9d9;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  position: absolute;
+  top: 313px;
+  color: black;
+  font-size: 40px;
+}
+
+
+.texto-bloco {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

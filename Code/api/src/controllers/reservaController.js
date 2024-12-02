@@ -5,14 +5,16 @@ const moment = require("moment-timezone");
 
 // Define a classe reservaController que contém os métodos para lidar com as reservas
 module.exports = class reservaController {
-
   // Método para criar uma nova reserva
   static async createReserva(req, res) {
-    const { fk_id_usuario, fk_id_sala, datahora_inicio, datahora_fim } = req.body;
+    const { fk_id_usuario, fk_id_sala, datahora_inicio, datahora_fim } =
+      req.body;
 
     // Valida se todos os campos obrigatórios foram preenchidos
     if (!fk_id_usuario || !fk_id_sala || !datahora_inicio || !datahora_fim) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
+      return res
+        .status(400)
+        .json({ error: "Todos os campos devem ser preenchidos" });
     }
 
     // Verifica se o usuário existe no banco
@@ -69,29 +71,46 @@ module.exports = class reservaController {
           }
 
           // Valida se a data de fim é maior que a data de início
-          if (new Date(datahora_fim).getTime() < new Date(datahora_inicio).getTime()) {
+          if (
+            new Date(datahora_fim).getTime() <
+            new Date(datahora_inicio).getTime()
+          ) {
             return res.status(400).json({ error: "Data ou Hora inválida" });
           }
 
           // Valida se a data de fim não é igual à data de início
-          if (new Date(datahora_fim).getTime() === new Date(datahora_inicio).getTime()) {
+          if (
+            new Date(datahora_fim).getTime() ===
+            new Date(datahora_inicio).getTime()
+          ) {
             return res.status(400).json({ error: "Data ou Hora inválida" });
           }
 
           // Define o limite de tempo de reserva para 1 hora
           const limiteHora = 60 * 60 * 1000; // 1 hora em milissegundos
           if (new Date(datahora_fim) - new Date(datahora_inicio) > limiteHora) {
-            return res.status(400).json({ error: "O tempo de reserva excede o limite (1h)" });
+            return res
+              .status(400)
+              .json({ error: "O tempo de reserva excede o limite (1h)" });
           }
 
           // Verifica se a sala já está reservada para o horário solicitado
           if (resultadosH.length > 0) {
-            return res.status(400).json({ error: "A sala escolhida já está reservada neste horário" });
+            return res
+              .status(400)
+              .json({
+                error: "A sala escolhida já está reservada neste horário",
+              });
           }
 
           // Insere a nova reserva no banco de dados
           const queryInsert = `INSERT INTO reserva (fk_id_usuario, fk_id_sala, datahora_inicio, datahora_fim) VALUES (?, ?, ?, ?)`;
-          const valuesInsert = [fk_id_usuario, fk_id_sala, datahora_inicio, datahora_fim];
+          const valuesInsert = [
+            fk_id_usuario,
+            fk_id_sala,
+            datahora_inicio,
+            datahora_fim,
+          ];
 
           // Executa a consulta para inserir a reserva
           connect.query(queryInsert, valuesInsert, (err, results) => {
@@ -100,7 +119,9 @@ module.exports = class reservaController {
             }
 
             // Retorna uma resposta de sucesso se a reserva foi criada com sucesso
-            return res.status(201).json({ message: "Sala reservada com sucesso!" });
+            return res
+              .status(201)
+              .json({ message: "Sala reservada com sucesso!" });
           });
         });
       });
@@ -121,12 +142,20 @@ module.exports = class reservaController {
       // Converte as datas para o fuso horário local antes de enviar a resposta
       const reserva = results.map((reserva) => ({
         ...reserva,
-        datahora_inicio: moment.utc(reserva.datahora_inicio).tz("America/Sao_Paulo").format("YYYY-MM-DD HH:mm:ss"),
-        datahora_fim: moment.utc(reserva.datahora_fim).tz("America/Sao_Paulo").format("YYYY-MM-DD HH:mm:ss"),
+        datahora_inicio: moment
+          .utc(reserva.datahora_inicio)
+          .tz("America/Sao_Paulo")
+          .format("YYYY-MM-DD HH:mm:ss"),
+        datahora_fim: moment
+          .utc(reserva.datahora_fim)
+          .tz("America/Sao_Paulo")
+          .format("YYYY-MM-DD HH:mm:ss"),
       }));
 
       // Retorna todas as reservas com as datas ajustadas
-      return res.status(200).json({ message: "Obtendo todas as reservas", reservas: reserva });
+      return res
+        .status(200)
+        .json({ message: "Obtendo todas as reservas", reservas: reserva });
     });
   }
 
@@ -137,7 +166,9 @@ module.exports = class reservaController {
 
     // Valida se todos os campos obrigatórios estão preenchidos
     if (!datahora_inicio || !datahora_fim) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
+      return res
+        .status(400)
+        .json({ error: "Todos os campos devem ser preenchidos" });
     }
 
     // Consulta para verificar se a sala já está reservada no novo horário
@@ -173,7 +204,9 @@ module.exports = class reservaController {
       }
 
       if (resultadosH.length > 0) {
-        return res.status(400).json({ error: "A sala já está reservada neste horário" });
+        return res
+          .status(400)
+          .json({ error: "A sala já está reservada neste horário" });
       }
 
       // Verifica se a data de fim é maior que a de início
@@ -184,7 +217,9 @@ module.exports = class reservaController {
       // Verifica se o tempo de reserva excede 1 hora
       const limiteHora = 60 * 60 * 1000; // 1 hora em milissegundos
       if (new Date(datahora_fim) - new Date(datahora_inicio) > limiteHora) {
-        return res.status(400).json({ error: "O tempo de reserva excede o limite (1h)" });
+        return res
+          .status(400)
+          .json({ error: "O tempo de reserva excede o limite (1h)" });
       }
 
       // Executa a consulta para atualizar a reserva
@@ -195,7 +230,9 @@ module.exports = class reservaController {
 
         // Verifica se alguma linha foi realmente afetada (se a reserva foi atualizada)
         if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Reserva não encontrada ou sem alterações" });
+          return res
+            .status(404)
+            .json({ error: "Reserva não encontrada ou sem alterações" });
         }
 
         // Retorna uma resposta de sucesso se a reserva foi atualizada

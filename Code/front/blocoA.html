@@ -24,7 +24,6 @@
         <img src="seta_voltar.png" alt="img" class="imagem-botao-perfil" />
         Voltar
       </button>
-
     </header>
     <div id="Div_risco">
       <div id="Div_risco02"></div>
@@ -47,9 +46,29 @@
       </section>
     </main>
 
+    <button id="open-modal">Reservar</button>
+    <div id="fade" class="hide"></div>
+    <div id="modal" class="hide">
+      <div class="modal-header">
+        <h3>Preencha os campos da sua reserva</h3>
+        <button id="close-modal">Confirmar</button>
+      </div>
+      <div class="modal-body">
+        <h5>Classificação:</h5>
+        <input type="text" placeholder="Classificação" />
+        <h5>Início:</h5>
+        <input type="text" placeholder="Início" />
+        <h5>Término:</h5>
+        <input type="text" placeholder="Término" />
+        <h5>Data:</h5>
+        <input type="date" min="2024-01-01" max="2024-12-31" />
+      </div>
+    </div>
+    
     <footer class="footer-inicial">
       <p>&copy;Desenvolvido por:Yasmin,Mateus e Arthur</p>
     </footer>
     <script src="appSala.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

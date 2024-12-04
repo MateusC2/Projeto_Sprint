@@ -12,7 +12,7 @@ if (pagina_atual === "blocoA.html") {
 }
 
 function getBlocoA() {
-  fetch("http://localhost:5000/api/v1/blocoA", {
+  fetch("http://10.89.240.86:5000/api/v1/blocoA", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ function getBlocoA() {
 }
 
 function getBlocoB() {
-  fetch("http://localhost:5000/api/v1/blocoB", {
+  fetch("http://10.89.240.86:5000/api/v1/blocoB", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -106,7 +106,7 @@ function getBlocoB() {
 }
 
 function getBlocoC() {
-  fetch("http://localhost:5000/api/v1/blocoC", {
+  fetch("http://10.89.240.86:5000/api/v1/blocoC", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -153,7 +153,7 @@ function getBlocoC() {
 }
 
 function getBlocoD() {
-  fetch("http://localhost:5000/api/v1/blocoD", {
+  fetch("http://10.89.240.86:5000/api/v1/blocoD", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

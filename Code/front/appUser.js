@@ -23,7 +23,7 @@ function createUser(event) {
   const senha = document.getElementById("senha").value;
 
   //Requisição HTTP para o endpoint de cadastro de usuario
-  fetch("http://localhost:5000/api/v1/user", {
+  fetch("http://10.89.240.86:5000/api/v1/user", {
     //Realiza uma chamada http para o servidor(a rota definida)
     method: "POST",
     headers: {
@@ -73,7 +73,7 @@ function loginUser(event) {
   const senha = document.getElementById("senha").value;
 
   // Realiza uma requisição POST para a API de login
-  fetch("http://localhost:5000/api/v1/userLogin", {
+  fetch("http://10.89.240.86:5000/api/v1/userLogin", {
     method: "POST", // Define o método da requisição como POST
     headers: {
       "Content-Type": "application/json", // Define o tipo de conteúdo como JSON
